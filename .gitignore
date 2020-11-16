@@ -4,9 +4,6 @@
 *.dll
 *.so
 *.dylib
-icapeg
-go.sum
-send_bin_to_vm.sh
 
 # Test binary, built with `go test -c`
 *.test
@@ -14,12 +11,5 @@ send_bin_to_vm.sh
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Dependency directories
-vendor/
-
-# Misc
-.DS_Store
-.idea/
-
-# Logs
-logs.txt
+# Dependency directories (remove the comment below to include it)
+# vendor/
