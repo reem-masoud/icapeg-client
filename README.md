@@ -54,7 +54,7 @@ To discover the go version you installed
 
 1. Install the icap-client library
 
-    ```bash
+  ```bash
     go get -u github.com/egirna/icap-client
 
   ```
