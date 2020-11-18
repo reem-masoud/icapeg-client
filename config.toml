@@ -1,0 +1,8 @@
+[configuration]
+
+download_file = "http://www.eicar.org/download/eicar_com.zip"
+
+[icap_configuration]
+
+host = "127.0.0.1"
+port = "1344"

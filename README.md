@@ -4,7 +4,7 @@ icapeg-client is application used to test the ICAP server
 
 ## Things to have
 
-1. **Golang**
+1. **Golang**(latest enough to be able to use go mod)
 
      ***A sample installation of go version 1.14***:
 
