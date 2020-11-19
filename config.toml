@@ -6,3 +6,4 @@ download_file = "http://www.eicar.org/download/eicar_com.zip"
 
 host = "127.0.0.1"
 port = "1344"
+service = "respmod"

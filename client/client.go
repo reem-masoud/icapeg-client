@@ -15,7 +15,7 @@ import (
 
 //Clienticap is
 func Clienticap() {
-	file, host, port := config.Configtoml()
+	file, host, port, service := config.Configtoml()
 	httpReq, err := http.NewRequest(http.MethodGet, file, nil)
 	fmt.Println(file)
 	if err != nil {
@@ -27,7 +27,7 @@ func Clienticap() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	icap := "icap://" + host + ":" + port + "/respmod"
+	icap := "icap://" + host + ":" + port + "/" + service
 	//Making a simple RESPMOD call
 	/*req, err := ic.NewRequest(ic.MethodRESPMOD, icap, httpReq, httpResp)
 	fmt.Println(icap)
