@@ -55,18 +55,10 @@ To discover the go version you installed
 1. Clone the ICAPeg-client repository
 
   ```bash
-<<<<<<< HEAD
-    https://github.com/egirna/icapeg-client.git
-
-  ```
-
-2. Enable go modules to install libraries(if the go version is 15 -> GO115MODULE and so on)
-=======
     git clone https://github.com/egirna/icapeg-client.git
 
   ```
-2. Enable go modules to install libraries
->>>>>>> 077643b7aef594f230bfcba445e84c0ce5e39651
+2. Enable go modules to install libraries(if the go version is 1.15 -> GO115MODULE and so on)
 
   ```bash
     export GO114MODULE=on
