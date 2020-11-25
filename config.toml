@@ -1,9 +1,9 @@
 [configuration]
 
-download_file = "http://www.eicar.org/download/eicar_com.zip"
+download_file = "http://www.africau.edu/images/default/sample.pdf"
 
 [icap_configuration]
 
-host = "127.0.0.1"
+host = "us.icap.glasswall-icap.com"
 port = "1344"
-service = "respmod"
+service = "gw_rebuild"

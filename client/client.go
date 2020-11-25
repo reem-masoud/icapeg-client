@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	//"os"
+	"os"
 	"time"
 
 	"github.com/icapeg-client/config"
@@ -125,16 +125,16 @@ func Clienticap() {
 			log.Fatal(err)
 		}
 		//Setting preview obtained from OPTIONS call
-		/*
+		*/
 			optReq, err := ic.NewRequest(ic.MethodOPTIONS, icap, nil, nil)
 
 			if err != nil {
 				log.Fatal(err)
 				return
 			}
-			client := &ic.Client{
-				Timeout: 5 * time.Second,
-			}
+		//	client := &ic.Client{
+		//		Timeout: 5 * time.Second,
+		//	}
 			optResp, err := client.Do(optReq)
 
 			if err != nil {
@@ -142,21 +142,30 @@ func Clienticap() {
 				return
 			}
 			//Making simple response call
-			req, err := ic.NewRequest(ic.MethodRESPMOD, icap, httpReq, httpResp)
+		/*	req, err := ic.NewRequest(ic.MethodRESPMOD, icap, httpReq, httpResp)
 			fmt.Println(icap)
 
 			if err != nil {
 				log.Fatal(err)
 			}
-
+*/
 			req.SetPreview(optResp.PreviewBytes)
-
+/*
 			resp, err := client.Do(req)
 
 			if err != nil {
 				log.Fatal(err)
 			}
-	*/
-	fmt.Println(resp.StatusCode)
+*/
+fmt.Println(resp.StatusCode)
+x:= resp.ContentResponse
+samplefile, err := os.Create("sample.pdf")
+if err != nil {
+ fmt.Println(err)
+ os.Exit(1)
+}
+ defer samplefile.Close()
+x.Write(samplefile)
+	
 
 }
