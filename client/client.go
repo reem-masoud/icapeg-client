@@ -7,6 +7,7 @@ import (
 
 	"os"
 	"time"
+	"io"
 
 	"github.com/icapeg-client/config"
 
@@ -41,7 +42,7 @@ func Clienticap() {
 	req.ExtendHeader(requestHeader)
 
 	client := &ic.Client{
-		Timeout: 5 * time.Second,
+		Timeout: 25 * time.Second,
 	}
 
 	resp, err := client.Do(req)
@@ -158,14 +159,15 @@ func Clienticap() {
 			}
 */
 fmt.Println(resp.StatusCode)
-x:= resp.ContentResponse
+fmt.Println(resp.ContentResponse)
+
 samplefile, err := os.Create("sample.pdf")
 if err != nil {
  fmt.Println(err)
  os.Exit(1)
 }
  defer samplefile.Close()
-x.Write(samplefile)
-	
+//x.Write(samplefile)
+io.Copy(samplefile, resp.ContentResponse.Body)	
 
 }
