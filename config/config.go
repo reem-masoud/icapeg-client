@@ -1,13 +1,14 @@
 package config
 
 import (
+	"time"
 	"fmt"
 
 	"github.com/spf13/viper"
 )
 
 //Configtoml is
-func Configtoml() (string,string,string,string) {
+func Configtoml() (string,string,string,string,time.Duration,string) {
 
 	viper.SetConfigName("config")                
 	viper.SetConfigType("toml")                  
@@ -21,6 +22,8 @@ func Configtoml() (string,string,string,string) {
 	host := viper.GetString("icap_configuration.host")
 	port := viper.GetString("icap_configuration.port")
 	service := viper.GetString("icap_configuration.service")
-	return file,host,port,service
+	timeout := viper.GetDuration("icap_timeout.timeout")
+	filepath := viper.GetString("configuration.file_path")
+	return file,host,port,service,timeout,filepath
 
 }

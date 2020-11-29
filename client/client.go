@@ -17,7 +17,7 @@ import (
 //Clienticap is
 func Clienticap() {
 	var requestHeader http.Header
-	file, host, port, service := config.Configtoml()
+	file, host, port, service,timeout,filepath := config.Configtoml()
 	httpReq, err := http.NewRequest(http.MethodGet, file, nil)
 	
 	if err != nil {
@@ -42,7 +42,7 @@ func Clienticap() {
 	req.ExtendHeader(requestHeader)
 
 	client := &ic.Client{
-		Timeout: 25 * time.Second,
+		Timeout: timeout * time.Millisecond,
 	}
 
 	resp, err := client.Do(req)
@@ -159,9 +159,9 @@ func Clienticap() {
 			}
 */
 fmt.Println(resp.StatusCode)
-fmt.Println(resp.ContentResponse)
+//fmt.Println(resp.ContentResponse)
 
-samplefile, err := os.Create("sample.pdf")
+samplefile, err := os.Create(filepath)
 if err != nil {
  fmt.Println(err)
  os.Exit(1)

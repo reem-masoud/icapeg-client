@@ -1,9 +1,13 @@
 [configuration]
 
 download_file = "http://www.africau.edu/images/default/sample.pdf"
+file_path = "client/sample.pdf"
 
 [icap_configuration]
 
 host = "us.icap.glasswall-icap.com"
 port = "1344"
 service = "gw_rebuild"
+
+[icap_timeout]
+timeout = 25000 #millisecond
