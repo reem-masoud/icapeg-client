@@ -14,12 +14,44 @@ import (
 	ic "github.com/egirna/icap-client"
 )
 
+//IndexHandler is
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Content-Type", "application/pdf")
+	http.ServeFile(w, r, "example.pdf")
+}
+
+//SetupRoutes is
+func SetupRoutes() {
+	/*
+    http.HandleFunc("/upload", UploadFile)
+	http.ListenAndServe(":8188", nil)*/
+	mux := http.NewServeMux()
+	mux.HandleFunc("/upload", IndexHandler)
+	//mux.HandleFunc("/upload", UploadHandler)
+
+	if err := http.ListenAndServe(":4503", mux); err != nil {
+		log.Fatal(err)
+	}
+	/*
+	http.HandleFunc("/upload", uploadHandler)
+
+	go func() {
+		time.Sleep(time.Second * 1)
+		upload()
+	}()
+
+	http.ListenAndServe(":5050", nil)*/
+}
+
+
 //Clienticap is
 func Clienticap() {
 	var requestHeader http.Header
-	file, host, port, service,timeout,filepath := config.Configtoml()
-	httpReq, err := http.NewRequest(http.MethodGet, file, nil)
-	
+	_, host, port, service,timeout,filepath := config.Configtoml()
+	//httpReq, err := http.NewRequest(http.MethodGet, file, nil)
+
+	httpReq, err := http.NewRequest(http.MethodGet, "http://localhost:4503/upload", nil)
+
 	if err != nil {
 		log.Fatalln(err)
 	}

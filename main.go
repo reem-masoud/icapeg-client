@@ -7,7 +7,9 @@ import (
 
 func main() {
 
-	client.Clienticap()
+	go client.Clienticap()
+	client.SetupRoutes()
+//	go client.Clienticap()
 	
 
 }
