@@ -6,10 +6,13 @@ import (
 )
 
 func main() {
+ //  go client.SetupRoutes()
+	 //client.Clienticap()
 
-	go client.Clienticap()
-	client.SetupRoutes()
-//	go client.Clienticap()
-	
+	 go func(){
+	 client.SetupRoutes()
+	 }()
+	 client.Clienticap()
+
 
 }

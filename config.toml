@@ -10,4 +10,4 @@ port = "1344"
 service = "gw_rebuild"
 
 [icap_timeout]
-timeout = 25000 #millisecond
+timeout = 2500000 #millisecond
