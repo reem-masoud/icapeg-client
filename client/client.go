@@ -1,11 +1,11 @@
 package client
 
 import (
-	"bytes"
+//	"bytes"
 	"fmt"
-	//"io"
+//	"io"
 	"log"
-	"io/ioutil"
+//	"io/ioutil"
 	//"mime/multipart"
 	"net/http"
 	"os"
@@ -72,11 +72,31 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 }*/
 
 func createHandler(w http.ResponseWriter, r *http.Request) {
-    vars := mux.Vars(r)
-    name := vars["name"]
-    body, _ := ioutil.ReadAll(r.Body)
-    fmt.Fprint(w, name)
-    ioutil.WriteFile(name, []byte(body), 0644)
+	vars := mux.Vars(r)
+//	w.Header().Set("Content-Type", "application/pdf; charset=utf-8")
+w.Header().Set("Content-Type", "application/pdf")
+//	w.WriteHeader(http.StatusOK)
+    fmt.Fprintf(w, vars["example.pdf"])
+//	name := vars["example.pdf"]
+//	w.Header().Set("Content-Type", "application/pdf; charset=utf-8")
+   // body, _ := ioutil.ReadAll(r.Body)
+ //   fmt.Fprint(w, name)
+	//ioutil.WriteFile(name, []byte(body), 0644)
+	//w.Header().Set("Content-Type", "application/pdf; charset=utf-8")
+	
+}
+func createHandlerg(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	w.Header().Set("Content-Type", "application/pdf; charset=utf-8")
+	w.WriteHeader(http.StatusOK)
+    fmt.Fprintf(w, vars["example.pdf"])
+//	name := vars["example.pdf"]
+//	w.Header().Set("Content-Type", "application/pdf; charset=utf-8")
+   // body, _ := ioutil.ReadAll(r.Body)
+ //   fmt.Fprint(w, name)
+	//ioutil.WriteFile(name, []byte(body), 0644)
+	//w.Header().Set("Content-Type", "application/pdf; charset=utf-8")
+	
 }
 //SetupRoutes is
 func SetupRoutes() {
@@ -100,14 +120,15 @@ func SetupRoutes() {
 
 	http.ListenAndServe(":5050", nil)*/
 	r := mux.NewRouter()
-    r.HandleFunc("/textfiles", createHandler).Methods("POST")
+	r.HandleFunc("/p/{example.pdf}", createHandler).Methods("POST")
+	r.HandleFunc("/g/{example.pdf}", createHandler).Methods("GET")
+//	r.HandleFunc("/a/{example.pdf}", createHandlerg).Methods("GET")
     log.Fatal(http.ListenAndServe(":8080", r))
 }
 
-
 //Clienticap is
 func Clienticap() {
-	var requestHeader http.Header
+	//var requestHeader http.Header
 	_, host, port, service, timeout, _ := config.Configtoml()
 	//httpReq, err := http.NewRequest(http.MethodGet, file, nil)
 /*	fileDir, _ := os.Getwd()
@@ -122,18 +143,20 @@ func Clienticap() {
 	io.Copy(part, file)
 	writer.Close()*/
 	clientt := &http.Client{}
-	f, err := os.Open("file.txt")
+	f, err := os.Open("example.pdf")
 	if err != nil {
 		panic(err)
 	}
 	defer f.Close()
-	postData := make([]byte, 100)
+	
+	//postData := make([]byte, 1000)
 	//req, err := http.NewRequest("POST", "http://example.com", bytes.NewReader(postData))
-	reqq, err := http.NewRequest("POST", "http://localhost:8080/textfiles", bytes.NewReader(postData))
+	reqq, err := http.NewRequest("POST", "http://localhost:8080/p/example.pdf",f)
 	if err != nil {
 		os.Exit(1)
 	}
-	reqq.Header.Add("User-Agent", "myClient")
+	reqq.Header.Add("Content-Type", "application/pdf; charset=utf-8")
+	//reqq.Header.Add("User-Agent", "myClient")
 	respp, err := clientt.Do(reqq)
 	defer respp.Body.Close()
 	fmt.Println(respp)
@@ -141,12 +164,13 @@ func Clienticap() {
 
 //	httpReq, _ := http.NewRequest("POST", "http://www.yahoo.com", body)
 //httpReq, err := http.NewRequest(http.MethodGet, "http://localhost:4503/upload", nil)
-httpReq, err := http.NewRequest(http.MethodGet, "http://localhost:8080/textfiles", nil)
+httpReq, err := http.NewRequest(http.MethodGet, "http://localhost:8080/g/example.pdf", nil)
 
 	  //fmt.Println("Contents of file:", string(data))
 		if err != nil {
 		log.Fatalln(err)
 		}
+		httpReq.Header.Add("Content-Type", "application/pdf; charset=utf-8")
 	httpClient := &http.Client{}
 	httpResp, err := httpClient.Do(httpReq)
 
@@ -163,7 +187,7 @@ httpReq, err := http.NewRequest(http.MethodGet, "http://localhost:8080/textfiles
 		panic(err)
 	}
 
-	req.ExtendHeader(requestHeader)
+	//req.ExtendHeader(requestHeader)
 
 	client := &ic.Client{
 		Timeout: timeout * time.Millisecond,
@@ -284,9 +308,9 @@ httpReq, err := http.NewRequest(http.MethodGet, "http://localhost:8080/textfiles
 		}
 	
 	fmt.Println(resp.StatusCode)*/
-	//fmt.Println(resp.ContentResponse)
-/*
-	samplefile, err := os.Create(filepathh)
+	fmt.Println(resp.ContentResponse)
+		
+/*	samplefile, err := os.Create(filepathh)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
